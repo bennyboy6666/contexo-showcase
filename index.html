@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contexo — Showcase</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #0a0f1a;
+    color: #e2e8f0;
+    min-height: 100vh;
+  }
+
+  /* Auth screen */
+  #auth-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  #auth-screen h1 {
+    font-size: 2.4rem;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+  }
+  #auth-screen p { color: #64748b; margin-bottom: 30px; }
+  #auth-form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  #auth-form input {
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    padding: 12px 20px;
+    color: #e2e8f0;
+    font-size: 1rem;
+    outline: none;
+    width: 250px;
+  }
+  #auth-form input:focus { border-color: #3b82f6; }
+  #auth-form button {
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    border: none;
+    border-radius: 10px;
+    padding: 12px 24px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  #auth-form button:hover { opacity: 0.9; }
+  #auth-error {
+    color: #ef4444;
+    margin-top: 12px;
+    font-size: 0.9rem;
+    display: none;
+  }
+
+  /* Main content */
+  #main-content { display: none; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+
+  header {
+    text-align: center;
+    padding: 40px 20px 20px;
+    border-bottom: 1px solid #1e293b;
+    margin-bottom: 40px;
+  }
+  header h1 {
+    font-size: 2.4rem;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+  }
+  header p { color: #64748b; font-size: 1rem; }
+  header .tagline {
+    color: #94a3b8;
+    font-size: 1.15rem;
+    font-style: italic;
+    margin-top: 8px;
+  }
+
+  /* Nav */
+  nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+    padding: 0 20px;
+  }
+  nav button {
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 8px 16px;
+    color: #94a3b8;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  nav button:hover { border-color: #3b82f6; color: #e2e8f0; }
+  nav button.active {
+    background: rgba(59, 130, 246, 0.15);
+    border-color: #3b82f6;
+    color: #60a5fa;
+    font-weight: 600;
+  }
+
+  /* Sections */
+  .section { display: none; }
+  .section.active { display: block; }
+  .section h2 {
+    font-size: 1.6rem;
+    color: #e2e8f0;
+    margin-bottom: 8px;
+  }
+  .section .desc {
+    color: #64748b;
+    font-size: 0.95rem;
+    margin-bottom: 24px;
+  }
+
+  /* Image cards */
+  .diagram-card {
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 30px;
+    transition: border-color 0.2s;
+  }
+  .diagram-card:hover { border-color: #3b82f6; }
+  .diagram-card img {
+    width: 100%;
+    display: block;
+    cursor: pointer;
+  }
+  .diagram-card .card-info {
+    padding: 16px 20px;
+  }
+  .diagram-card h3 {
+    font-size: 1.1rem;
+    color: #e2e8f0;
+    margin-bottom: 4px;
+  }
+  .diagram-card .card-desc {
+    color: #64748b;
+    font-size: 0.85rem;
+  }
+
+  /* Grid for mockups */
+  .mockup-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+
+  /* Mockup list */
+  .mockup-list {
+    display: grid;
+    gap: 16px;
+  }
+  .mockup-item {
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 12px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: border-color 0.2s;
+  }
+  .mockup-item:hover { border-color: #8b5cf6; }
+  .mockup-item .num {
+    background: rgba(139, 92, 246, 0.15);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    border-radius: 8px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: #a78bfa;
+    flex-shrink: 0;
+  }
+  .mockup-item .info h4 { color: #e2e8f0; margin-bottom: 2px; }
+  .mockup-item .info p { color: #64748b; font-size: 0.82rem; }
+  .mockup-item a {
+    margin-left: auto;
+    background: rgba(139, 92, 246, 0.15);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    border-radius: 8px;
+    padding: 6px 14px;
+    color: #a78bfa;
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+  .mockup-item a:hover { background: rgba(139, 92, 246, 0.25); }
+
+  /* Vision section */
+  .vision-card {
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+  .vision-card h3 { color: #e2e8f0; margin-bottom: 12px; }
+  .vision-card p { color: #94a3b8; line-height: 1.7; font-size: 0.95rem; }
+  .vision-card .highlight {
+    color: #60a5fa;
+    font-weight: 600;
+  }
+
+  /* Pipeline visual */
+  .pipeline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 30px 0;
+  }
+  .pipeline-node {
+    text-align: center;
+    padding: 14px 20px;
+    border-radius: 12px;
+    border: 2px solid;
+    min-width: 130px;
+  }
+  .pn-capture { border-color: #f97316; background: rgba(249, 115, 22, 0.08); }
+  .pn-structure { border-color: #3b82f6; background: rgba(59, 130, 246, 0.08); }
+  .pn-kb { border-color: #8b5cf6; background: rgba(139, 92, 246, 0.08); }
+  .pn-distribute { border-color: #10b981; background: rgba(16, 185, 129, 0.08); }
+  .pn-icon { font-size: 1.8rem; }
+  .pn-label { font-weight: 700; font-size: 0.9rem; margin-top: 4px; }
+  .pn-capture .pn-label { color: #f97316; }
+  .pn-structure .pn-label { color: #3b82f6; }
+  .pn-kb .pn-label { color: #8b5cf6; }
+  .pn-distribute .pn-label { color: #10b981; }
+  .pn-sub { font-size: 0.72rem; color: #64748b; margin-top: 2px; }
+  .pipeline-arrow { font-size: 1.5rem; color: #475569; }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 40px 20px;
+    border-top: 1px solid #1e293b;
+    margin-top: 60px;
+    color: #475569;
+    font-size: 0.85rem;
+  }
+
+  /* Lightbox */
+  #lightbox {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.92);
+    z-index: 1000;
+    cursor: pointer;
+    padding: 20px;
+    overflow: auto;
+  }
+  #lightbox img {
+    max-width: 100%;
+    max-height: 95vh;
+    display: block;
+    margin: auto;
+    border-radius: 8px;
+  }
+  #lightbox-close {
+    position: fixed;
+    top: 16px;
+    right: 20px;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 1001;
+  }
+
+  @media (max-width: 768px) {
+    header h1 { font-size: 1.6rem; }
+    nav button { font-size: 0.75rem; padding: 6px 10px; }
+    .pipeline { flex-direction: column; }
+    .pipeline-arrow { transform: rotate(90deg); }
+    .mockup-item { flex-direction: column; text-align: center; }
+    .mockup-item a { margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- AUTH SCREEN -->
+<div id="auth-screen">
+  <h1>🧠 Contexo</h1>
+  <p>Showcase — Accès restreint</p>
+  <div id="auth-form">
+    <input type="password" id="password-input" placeholder="Mot de passe" autofocus>
+    <button onclick="checkPassword()">Entrer</button>
+  </div>
+  <p id="auth-error">Mot de passe incorrect</p>
+</div>
+
+<!-- MAIN CONTENT -->
+<div id="main-content">
+  <header>
+    <h1>🧠 Contexo Platform</h1>
+    <p><a href="https://contexo.app" style="color: #3b82f6; text-decoration: none;">contexo.app</a> — Le pipeline complet de captation et structuration de contexte AI</p>
+    <p class="tagline">"Feedivo capture. Contexo structure. MCP distribue."</p>
+  </header>
+
+  <!-- Pipeline -->
+  <div class="pipeline">
+    <div class="pipeline-node pn-capture"><div class="pn-icon">📱</div><div class="pn-label">Capture</div><div class="pn-sub">Terrain · 30s</div></div>
+    <div class="pipeline-arrow">→</div>
+    <div class="pipeline-node pn-structure"><div class="pn-icon">🎙️</div><div class="pn-label">Structuration</div><div class="pn-sub">Interviews · Voice</div></div>
+    <div class="pipeline-arrow">→</div>
+    <div class="pipeline-node pn-kb"><div class="pn-icon">📚</div><div class="pn-label">Knowledge Base</div><div class="pn-sub">Validée · Scorée</div></div>
+    <div class="pipeline-arrow">→</div>
+    <div class="pipeline-node pn-distribute"><div class="pn-icon">🔌</div><div class="pn-label">Distribution</div><div class="pn-sub">MCP · API</div></div>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <button class="active" onclick="showSection('diagrams', this)">📐 Diagrammes</button>
+    <button onclick="showSection('mockups', this)">🎨 Mockups UI</button>
+    <button onclick="showSection('vision', this)">💡 Vision</button>
+  </nav>
+
+  <div class="container">
+
+    <!-- DIAGRAMS SECTION -->
+    <div id="diagrams" class="section active">
+      <h2>📐 Architecture & Flows</h2>
+      <p class="desc">Diagrammes D2 — architecture, flows, scénarios et stratégie</p>
+
+      <div class="diagram-card">
+        <img src="01-contexo-detailed.png" alt="Architecture Détaillée" onclick="openLightbox(this.src)">
+        <div class="card-info">
+          <h3>🧠 Architecture Détaillée</h3>
+          <p class="card-desc">Vue complète: Users → Capture (ex-Feedivo) ↔ Core → KB unifiée → Flywheel → Modules (MCP, Reports, Cockpit) + Sécurité + Infra</p>
+        </div>
+      </div>
+
+      <div class="diagram-card">
+        <img src="02-flow-consultant.png" alt="Flow Consultant" onclick="openLightbox(this.src)">
+        <div class="card-info">
+          <h3>👔 Flow Consultant</h3>
+          <p class="card-desc">5 phases: Setup projet → Capture terrain → Interviews voice-first → KB & Validation → Export & Livraison. Boucle flywheel intégrée.</p>
+        </div>
+      </div>
+
+      <div class="diagram-card">
+        <img src="03-flow-interview.png" alt="Flow Interview" onclick="openLightbox(this.src)">
+        <div class="card-info">
+          <h3>🎙️ Flow Interview + Voice Orb</h3>
+          <p class="card-desc">Côté PM (filtrer contexte, générer lien) → Côté interviewé (consent, Voice Orb 5 états) → AI Engine (STT/TTS, questions adaptatives) → KB</p>
+        </div>
+      </div>
+
+      <div class="diagram-card">
+        <img src="04-architecture-technique.png" alt="Architecture Technique" onclick="openLightbox(this.src)">
+        <div class="card-info">
+          <h3>🏗️ Architecture Technique</h3>
+          <p class="card-desc">Stack: Mobile (React Native) + Web (Nuxt 4) → FastAPI Gateway → Services → PostgreSQL + Qdrant + Redis + S3 + Docker</p>
+        </div>
+      </div>
+
+      <div class="diagram-card">
+        <img src="05-scenario-erp.png" alt="Scénario ERP" onclick="openLightbox(this.src)">
+        <div class="card-info">
+          <h3>🎬 Scénario: Refonte ERP Industriel</h3>
+          <p class="card-desc">Cas concret en 5 jours: Setup → Photos terrain annotées → 4 interviews parallèles → Validation KB (92%) → Export MCP + Rapport. Comparatif avec/sans Contexo.</p>
+        </div>
+      </div>
+
+      <div class="diagram-card">
+        <img src="06-flywheel-detailed.png" alt="Flywheel Engine" onclick="openLightbox(this.src)">
+        <div class="card-info">
+          <h3>🔄 Flywheel Engine — Le Moat</h3>
+          <p class="card-desc">Cycle: Collecter → Anonymiser → Catégoriser → Apprendre → Améliorer → Appliquer. Progression Client 1→50. Moat triple: Data + Time + Network.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- MOCKUPS SECTION -->
+    <div id="mockups" class="section">
+      <h2>🎨 Mockups UI (v0)</h2>
+      <p class="desc">10 écrans générés via v0 Platform API — Dark mode, français, SaaS premium</p>
+
+      <div class="mockup-list">
+        <div class="mockup-item">
+          <div class="num">1</div>
+          <div class="info"><h4>🔐 Login Page</h4><p>Dark mode, authentification FR</p></div>
+          <a href="https://demo-kzmlu1t09qlf2ihxxwms.vusercontent.net" target="_blank">Demo ↗</a>
+        </div>
+        <div class="mockup-item">
+          <div class="num">2</div>
+          <div class="info"><h4>🏠 Landing Page</h4><p>Hero + features + how it works + footer</p></div>
+          <a href="https://demo-kzmok9nuqxqubw8ngyep.vusercontent.net" target="_blank">Demo ↗</a>
+        </div>
+        <div class="mockup-item">
+          <div class="num">3</div>
+          <div class="info"><h4>➕ Création de Projet</h4><p>Wizard 3 étapes: décrire, upload, review & launch</p></div>
+          <a href="https://demo-kzmin3qy8xh66spwmdf5.vusercontent.net" target="_blank">Demo ↗</a>
+        </div>
+        <div class="mockup-item">
+          <div class="num">4</div>
+          <div class="info"><h4>📚 Vue KB</h4><p>Fact cards avec barres de confiance, gaps, contradictions, AI summary</p></div>
+        </div>
+        <div class="mockup-item">
+          <div class="num">5</div>
+          <div class="info"><h4>🎙️ Vue Interviews</h4><p>Liste sessions + plan AI + facts preview avec approve/reject</p></div>
+        </div>
+        <div class="mockup-item">
+          <div class="num">6</div>
+          <div class="info"><h4>🔮 Voice Orb</h4><p>Full-screen orbe avec animations pulse/listen/speak, mobile-first</p></div>
+        </div>
+        <div class="mockup-item">
+          <div class="num">7</div>
+          <div class="info"><h4>🤝 Sharing</h4><p>Team members, interview links avec filtre contexte, Loi 25 badge</p></div>
+        </div>
+        <div class="mockup-item">
+          <div class="num">8</div>
+          <div class="info"><h4>⚙️ Paramètres</h4><p>4 tabs: Profile, Organisation, Notifications, Sécurité</p></div>
+        </div>
+        <div class="mockup-item">
+          <div class="num">9</div>
+          <div class="info"><h4>🔗 Page Interview Publique</h4><p>Standalone auth-less, Voice Orb au centre, consent banner, mobile-first</p></div>
+        </div>
+        <div class="mockup-item">
+          <div class="num">10</div>
+          <div class="info"><h4>🔌 MCP / Intégrations</h4><p>Hub-and-spoke visual, 6 cards intégration, API keys, webhooks, SDK</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VISION SECTION -->
+    <div id="vision" class="section">
+      <h2>💡 Vision Contexo</h2>
+      <p class="desc">Le pipeline complet de captation et structuration de contexte AI</p>
+
+      <div class="vision-card">
+        <h3>🎯 Le Problème</h3>
+        <p>Les outils AI (Cursor, Claude, GPT) sont puissants mais travaillent <span class="highlight">dans le noir</span>. Ils n'ont pas le contexte terrain — les photos du poste de travail, la voix du mécanicien, les workarounds non-documentés. Résultat: du code déconnecté de la réalité.</p>
+      </div>
+
+      <div class="vision-card">
+        <h3>💡 La Solution</h3>
+        <p>Contexo est <span class="highlight">le pipeline complet de contexte AI</span>. Deux modes d'entrée, une KB unifiée:</p>
+        <p style="margin-top: 12px;"><strong style="color: #f97316;">📱 Contexo Capture (ex-Feedivo)</strong> — App mobile. Photos annotées ①②③ + voice notes. 30 secondes, offline-first. Pour le terrain.</p>
+        <p style="margin-top: 8px;"><strong style="color: #3b82f6;">🧠 Contexo Core</strong> — Web app. Interviews voice-first adaptatives + upload docs. 40 minutes. Pour le bureau.</p>
+        <p style="margin-top: 8px;"><strong style="color: #10b981;">🔌 MCP Server</strong> — Le contexte distribué dans TOUT outil AI: Cursor, Claude, Antigravity, Windsurf, OpenClaw, GPT.</p>
+      </div>
+
+      <div class="vision-card">
+        <h3>🔄 Le Flywheel (Le Moat)</h3>
+        <p>Chaque projet améliore le suivant. Après 50 clients, les questions deviennent <span class="highlight">chirurgicales</span>. Discovery de 3 semaines → 5 jours. Aucun compétiteur ne peut bootstrapper cette data sans les vrais projets.</p>
+      </div>
+
+      <div class="vision-card">
+        <h3>🏆 Positionnement Unique</h3>
+        <p>Personne ne combine: <span class="highlight">capture terrain mobile</span> (photos annotées + voice, offline) + <span class="highlight">interviews voice-first AI</span> (un lien, zéro compte) + <span class="highlight">KB structurée auto</span> (facts validés, contradictions, gaps) + <span class="highlight">MCP universel</span> (contexte dans tout outil AI) + <span class="highlight">flywheel cross-projets</span>.</p>
+        <p style="margin-top: 8px;">Les autres font l'exécution (Cursor, OpenClaw). Nous, on fait le <span class="highlight">contexte</span>. C'est complémentaire, pas concurrent.</p>
+      </div>
+
+      <div class="vision-card">
+        <h3>📅 Roadmap</h3>
+        <p><strong>Fév 2026</strong> — ✅ Backend Core, vision, domaine contexo.app, architecture, 10 mockups UI</p>
+        <p><strong>Mars 2026</strong> — Site web, app mobile "Contexo Capture", Voice Orb, MCP Server v1</p>
+        <p><strong>Avril 2026</strong> — Beta privée (Capture + Core), sync, premiers utilisateurs</p>
+        <p><strong>Mai 2026</strong> — 🚀 Launch public, Module Cockpit, Marketplace API</p>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>Contexo Platform — Confidentiel © 2026</p>
+    <p style="margin-top: 4px; font-size: 0.75rem;">Dernière mise à jour: Février 2026</p>
+  </footer>
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" onclick="closeLightbox()">
+  <span id="lightbox-close">✕</span>
+  <img id="lightbox-img" src="">
+</div>
+
+<script>
+  // Simple password check (client-side, not high security)
+  const HASH = '87e6ca15bfbe22a2c31cb6af48c025d4f15f78fad8ae135bafcf9a784f7b9f40'; // sha256 of password
+
+  async function sha256(str) {
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+
+  async function checkPassword() {
+    const input = document.getElementById('password-input').value;
+    const hash = await sha256(input);
+    if (hash === HASH) {
+      document.getElementById('auth-screen').style.display = 'none';
+      document.getElementById('main-content').style.display = 'block';
+      sessionStorage.setItem('contexo-auth', 'true');
+    } else {
+      document.getElementById('auth-error').style.display = 'block';
+      document.getElementById('password-input').value = '';
+      document.getElementById('password-input').focus();
+    }
+  }
+
+  // Auto-login if already authenticated in session
+  if (sessionStorage.getItem('contexo-auth') === 'true') {
+    document.getElementById('auth-screen').style.display = 'none';
+    document.getElementById('main-content').style.display = 'block';
+  }
+
+  // Enter key
+  document.getElementById('password-input').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') checkPassword();
+  });
+
+  // Section nav
+  function showSection(id, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // Lightbox
+  function openLightbox(src) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeLightbox();
+  });
+</script>
+</body>
+</html>
