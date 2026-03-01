@@ -360,6 +360,12 @@
     z-index: 1001;
   }
 
+  /* Vision tables */
+  .vision-card table th,
+  .vision-card table td {
+    white-space: nowrap;
+  }
+
   @media (max-width: 768px) {
     header h1 { font-size: 1.6rem; }
     nav button { font-size: 0.75rem; padding: 6px 10px; }
@@ -370,6 +376,9 @@
     .mockup-card .card-actions { margin-left: 0; }
     .mockup-item { flex-direction: column; text-align: center; }
     .mockup-item a { margin-left: 0; }
+    .vision-card table { font-size: 0.75rem; }
+    .vision-card table th,
+    .vision-card table td { padding: 6px 4px !important; }
   }
 </style>
 </head>
@@ -542,6 +551,7 @@
       <div class="vision-card">
         <h3>🎯 Le Problème</h3>
         <p>Les outils AI (Cursor, Claude, GPT) sont puissants mais travaillent <span class="highlight">dans le noir</span>. Ils n'ont pas le contexte terrain — les photos du poste de travail, la voix du mécanicien, les workarounds non-documentés. Résultat: du code déconnecté de la réalité.</p>
+        <p style="margin-top: 10px;">Les discovery traditionnels? <strong>2 à 4 semaines</strong>, des dizaines de réunions, des Google Docs éparpillés, des informations perdues entre les mains. Les experts terrain ont le savoir mais ne touchent jamais un ordi.</p>
       </div>
 
       <div class="vision-card">
@@ -552,9 +562,162 @@
         <p style="margin-top: 8px;"><strong style="color: #10b981;">🔌 MCP Server</strong> — Le contexte distribué dans TOUT outil AI: Cursor, Claude, Antigravity, Windsurf, OpenClaw, GPT.</p>
       </div>
 
+      <!-- NEW: ERP SCENARIO -->
+      <div class="vision-card" style="border-color: #f97316; border-width: 1px;">
+        <h3>🎬 Scénario Concret: Refonte ERP Industriel</h3>
+        <p style="color: #64748b; font-size: 0.85rem; margin-bottom: 14px;">Cas réel — cabinet consulting, client manufacturier 200 employés</p>
+
+        <p><strong style="color: #f97316;">Jour 1 — Setup (30 min)</strong></p>
+        <p style="margin-bottom: 12px;">Le consultant crée le projet dans Contexo. Le PM du client connecte son Drive (1 clic). L'agent scanne 340 fichiers SolidWorks, des POs chez Rexel, des specs. <em>"Vous fabriquez des assemblages soudés pour l'alimentaire, c'est ça?"</em> — <span class="highlight">scotché dès la première phrase</span>.</p>
+
+        <p><strong style="color: #3b82f6;">Jour 2-3 — Capture terrain (parallèle)</strong></p>
+        <p style="margin-bottom: 12px;">4 interviews en parallèle: chef d'atelier, comptable, inspecteur senior, IT interne. Chacun ouvre un lien → Voice Orb → il parle, point. <span class="highlight">Zéro compte, zéro password, zéro formation.</span> Marc le mécano photographie la presse #7 depuis son cell: <em>"Le cylindre gauche fuit, Christine a commandé chez Hydraulik."</em> L'agent répond: <em>"C'est la 2e fuite en 8 mois — l'alignement a été vérifié?"</em></p>
+
+        <p><strong style="color: #8b5cf6;">Jour 4 — Validation KB (auto)</strong></p>
+        <p style="margin-bottom: 12px;">Contexo a structuré tout le contexte: facts extraits, contradictions détectées, gaps identifiés. Le PM valide en 1h. Taux de confiance: <span class="highlight">92%</span>. Le consultant n'a pas posé une seule question — l'AI connaît déjà le terrain.</p>
+
+        <p><strong style="color: #10b981;">Jour 5 — Export & Livraison</strong></p>
+        <p>Export MCP → le contexte est injecté dans Cursor/Claude. Le code est ancré dans la réalité terrain. Rapport PDF structuré généré automatiquement. Le client est bluffé.</p>
+
+        <!-- Comparison table -->
+        <div style="margin-top: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <div style="background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2); border-radius: 10px; padding: 16px;">
+            <p style="font-weight: 700; color: #ef4444; margin-bottom: 8px;">❌ Sans Contexo</p>
+            <p style="font-size: 0.85rem;">• Discovery: <strong>2-4 semaines</strong></p>
+            <p style="font-size: 0.85rem;">• 12+ réunions, 6 Google Docs</p>
+            <p style="font-size: 0.85rem;">• Savoir terrain: perdu dans les emails</p>
+            <p style="font-size: 0.85rem;">• Coût consultant: ~<strong>$15,000+</strong></p>
+            <p style="font-size: 0.85rem;">• Code livré: déconnecté du terrain</p>
+          </div>
+          <div style="background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.2); border-radius: 10px; padding: 16px;">
+            <p style="font-weight: 700; color: #10b981; margin-bottom: 8px;">✅ Avec Contexo</p>
+            <p style="font-size: 0.85rem;">• Discovery: <strong>5 jours</strong></p>
+            <p style="font-size: 0.85rem;">• 4 interviews parallèles, auto-structuré</p>
+            <p style="font-size: 0.85rem;">• Savoir terrain: capturé + croisé</p>
+            <p style="font-size: 0.85rem;">• Coût AI: ~<strong>$2-3 par session</strong></p>
+            <p style="font-size: 0.85rem;">• Code livré: ancré dans la réalité</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- NEW: ROI & METRICS -->
+      <div class="vision-card">
+        <h3>📊 Impact & Métriques</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 12px;">
+          <div style="text-align: center; padding: 20px; background: rgba(59,130,246,0.06); border-radius: 10px;">
+            <div style="font-size: 2.2rem; font-weight: 800; color: #3b82f6;">75%</div>
+            <div style="font-size: 0.82rem; color: #94a3b8; margin-top: 4px;">Réduction du temps de discovery</div>
+            <div style="font-size: 0.72rem; color: #64748b;">3 semaines → 5 jours</div>
+          </div>
+          <div style="text-align: center; padding: 20px; background: rgba(139,92,246,0.06); border-radius: 10px;">
+            <div style="font-size: 2.2rem; font-weight: 800; color: #8b5cf6;">~$3</div>
+            <div style="font-size: 0.82rem; color: #94a3b8; margin-top: 4px;">Coût par interview AI</div>
+            <div style="font-size: 0.72rem; color: #64748b;">vs $500+ consultant/heure</div>
+          </div>
+          <div style="text-align: center; padding: 20px; background: rgba(16,185,129,0.06); border-radius: 10px;">
+            <div style="font-size: 2.2rem; font-weight: 800; color: #10b981;">100%</div>
+            <div style="font-size: 0.82rem; color: #94a3b8; margin-top: 4px;">Savoir terrain capturé</div>
+            <div style="font-size: 0.72rem; color: #64748b;">Zéro info perdue entre les mains</div>
+          </div>
+          <div style="text-align: center; padding: 20px; background: rgba(249,115,22,0.06); border-radius: 10px;">
+            <div style="font-size: 2.2rem; font-weight: 800; color: #f97316;">24/7</div>
+            <div style="font-size: 0.82rem; color: #94a3b8; margin-top: 4px;">Interviews en parallèle</div>
+            <div style="font-size: 0.72rem; color: #64748b;">Toutes langues, zéro formation</div>
+          </div>
+        </div>
+        <p style="margin-top: 16px; font-size: 0.88rem; color: #94a3b8;"><strong>Business Model:</strong> Track A (consulting) $2,500 setup + $500/mo → finance le Track B (SaaS). Marge: 90%+. Coût infra: $5-20/mo par client.</p>
+      </div>
+
       <div class="vision-card">
         <h3>🔄 Le Flywheel (Le Moat)</h3>
-        <p>Chaque projet améliore le suivant. Après 50 clients, les questions deviennent <span class="highlight">chirurgicales</span>. Discovery de 3 semaines → 5 jours. Aucun compétiteur ne peut bootstrapper cette data sans les vrais projets.</p>
+        <p>Chaque projet améliore le suivant. L'intelligence s'accumule:</p>
+        <div style="margin: 16px 0; display: grid; gap: 8px;">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <span style="background: rgba(239,68,68,0.15); color: #f87171; border-radius: 6px; padding: 4px 10px; font-weight: 700; font-size: 0.82rem; min-width: 90px; text-align: center;">Client #1</span>
+            <span style="font-size: 0.9rem;">Questions correctes mais génériques — discovery en <strong>2 semaines</strong></span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <span style="background: rgba(249,115,22,0.15); color: #fb923c; border-radius: 6px; padding: 4px 10px; font-weight: 700; font-size: 0.82rem; min-width: 90px; text-align: center;">Client #10</span>
+            <span style="font-size: 0.9rem;"><em>"Les manufacturiers de votre taille ont souvent un problème de traçabilité. C'est votre cas?"</em></span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <span style="background: rgba(59,130,246,0.15); color: #60a5fa; border-radius: 6px; padding: 4px 10px; font-weight: 700; font-size: 0.82rem; min-width: 90px; text-align: center;">Client #50</span>
+            <span style="font-size: 0.9rem;"><em>"Vous exportez aux US? Vos assemblages nécessitent ASME BPVC Section IX en plus de CSA W47.1."</em> — <span class="highlight">Chirurgical.</span></span>
+          </div>
+        </div>
+        <p style="margin-top: 8px;">Aucun compétiteur ne peut bootstrapper cette data sans les vrais projets terrain. <span class="highlight">Triple moat: Data + Time + Network.</span></p>
+      </div>
+
+      <!-- NEW: COMPETITIVE COMPARISON -->
+      <div class="vision-card">
+        <h3>⚔️ Comparaison Compétitive</h3>
+        <p style="margin-bottom: 16px;">Les autres font l'exécution. Nous, on fait le <span class="highlight">contexte</span>. C'est complémentaire, pas concurrent.</p>
+        <div style="overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem;">
+            <thead>
+              <tr style="border-bottom: 2px solid #334155;">
+                <th style="text-align: left; padding: 10px 12px; color: #94a3b8;">Capacité</th>
+                <th style="text-align: center; padding: 10px 8px; color: #3b82f6;">Contexo</th>
+                <th style="text-align: center; padding: 10px 8px; color: #64748b;">Notion AI</th>
+                <th style="text-align: center; padding: 10px 8px; color: #64748b;">Dovetail</th>
+                <th style="text-align: center; padding: 10px 8px; color: #64748b;">Cursor</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid #1e293b;">
+                <td style="padding: 8px 12px;">Capture terrain mobile</td>
+                <td style="text-align: center; padding: 8px;">✅</td>
+                <td style="text-align: center; padding: 8px;">❌</td>
+                <td style="text-align: center; padding: 8px;">❌</td>
+                <td style="text-align: center; padding: 8px;">❌</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #1e293b;">
+                <td style="padding: 8px 12px;">Interviews voice-first AI</td>
+                <td style="text-align: center; padding: 8px;">✅</td>
+                <td style="text-align: center; padding: 8px;">❌</td>
+                <td style="text-align: center; padding: 8px;">🟡</td>
+                <td style="text-align: center; padding: 8px;">❌</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #1e293b;">
+                <td style="padding: 8px 12px;">KB auto-structurée</td>
+                <td style="text-align: center; padding: 8px;">✅</td>
+                <td style="text-align: center; padding: 8px;">🟡</td>
+                <td style="text-align: center; padding: 8px;">🟡</td>
+                <td style="text-align: center; padding: 8px;">❌</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #1e293b;">
+                <td style="padding: 8px 12px;">Zéro compte interviewé</td>
+                <td style="text-align: center; padding: 8px;">✅</td>
+                <td style="text-align: center; padding: 8px;">❌</td>
+                <td style="text-align: center; padding: 8px;">❌</td>
+                <td style="text-align: center; padding: 8px;">—</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #1e293b;">
+                <td style="padding: 8px 12px;">MCP universel (tout outil AI)</td>
+                <td style="text-align: center; padding: 8px;">✅</td>
+                <td style="text-align: center; padding: 8px;">❌</td>
+                <td style="text-align: center; padding: 8px;">❌</td>
+                <td style="text-align: center; padding: 8px;">🟡</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #1e293b;">
+                <td style="padding: 8px 12px;">Flywheel cross-projets</td>
+                <td style="text-align: center; padding: 8px;">✅</td>
+                <td style="text-align: center; padding: 8px;">❌</td>
+                <td style="text-align: center; padding: 8px;">❌</td>
+                <td style="text-align: center; padding: 8px;">❌</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px 12px;">Offline-first terrain</td>
+                <td style="text-align: center; padding: 8px;">✅</td>
+                <td style="text-align: center; padding: 8px;">❌</td>
+                <td style="text-align: center; padding: 8px;">❌</td>
+                <td style="text-align: center; padding: 8px;">❌</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="margin-top: 12px; font-size: 0.82rem; color: #64748b;">✅ = natif &nbsp;&nbsp; 🟡 = partiel &nbsp;&nbsp; ❌ = absent &nbsp;&nbsp; — = non applicable</p>
+        <p style="margin-top: 8px; font-size: 0.88rem; color: #94a3b8;">Personne ne combine <span class="highlight">capture terrain + interviews voice + KB auto + MCP + flywheel</span>. Les autres ouvrent des fichiers. Contexo ouvre des conversations.</p>
       </div>
 
       <div class="vision-card">
@@ -565,7 +728,7 @@
 
       <div class="vision-card">
         <h3>📅 Roadmap</h3>
-        <p><strong>Fév 2026</strong> — ✅ Backend Core, vision, domaine contexo.app, architecture, 10 mockups UI</p>
+        <p><strong>Fév 2026</strong> — ✅ Backend 69 endpoints, vision, domaine contexo.app, architecture, 10 mockups UI, API testée 100%</p>
         <p><strong>Mars 2026</strong> — Site web, app mobile "Contexo Capture", Voice Orb, MCP Server v1</p>
         <p><strong>Avril 2026</strong> — Beta privée (Capture + Core), sync, premiers utilisateurs</p>
         <p><strong>Mai 2026</strong> — 🚀 Launch public, Module Cockpit, Marketplace API</p>
@@ -576,7 +739,7 @@
 
   <footer>
     <p>Contexo Platform — Confidentiel © 2026</p>
-    <p style="margin-top: 4px; font-size: 0.75rem;">Dernière mise à jour: 28 février 2026</p>
+    <p style="margin-top: 4px; font-size: 0.75rem;">Dernière mise à jour: 1 mars 2026</p>
   </footer>
 </div>
 
