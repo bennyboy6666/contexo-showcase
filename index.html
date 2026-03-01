@@ -34,6 +34,9 @@
     display: flex;
     gap: 10px;
     align-items: center;
+    width: 100%;
+    max-width: 360px;
+    padding: 0 20px;
   }
   #auth-form input {
     background: #1e293b;
@@ -43,7 +46,8 @@
     color: #e2e8f0;
     font-size: 1rem;
     outline: none;
-    width: 250px;
+    flex: 1;
+    min-width: 0;
   }
   #auth-form input:focus { border-color: #3b82f6; }
   #auth-form button {
@@ -366,6 +370,22 @@
     white-space: nowrap;
   }
 
+  /* ERP comparison grid */
+  .erp-comparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 20px;
+  }
+
+  /* ROI metrics grid */
+  .roi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: 12px;
+  }
+
   @media (max-width: 768px) {
     header h1 { font-size: 1.6rem; }
     nav button { font-size: 0.75rem; padding: 6px 10px; }
@@ -378,7 +398,42 @@
     .mockup-item a { margin-left: 0; }
     .vision-card table { font-size: 0.75rem; }
     .vision-card table th,
-    .vision-card table td { padding: 6px 4px !important; }
+    .vision-card table td {
+      padding: 6px 4px !important;
+      white-space: normal;
+    }
+  }
+
+  @media (max-width: 480px) {
+    header h1 { font-size: 1.4rem; }
+    header .tagline { font-size: 0.95rem; }
+    .container { padding: 20px 12px; }
+    .section h2 { font-size: 1.3rem; }
+    .vision-card { padding: 18px 14px; }
+    .vision-card h3 { font-size: 1.05rem; }
+    .vision-card p { font-size: 0.88rem; }
+
+    /* Stack ERP comparison on small phones */
+    .erp-comparison { grid-template-columns: 1fr; }
+
+    /* ROI grid: 2 columns on small phones */
+    .roi-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .roi-grid .roi-item { padding: 14px 8px; }
+    .roi-grid .roi-value { font-size: 1.8rem; }
+    .roi-grid .roi-label { font-size: 0.75rem; }
+    .roi-grid .roi-sub { font-size: 0.68rem; }
+
+    /* Competitive table: allow wrapping for first column */
+    .vision-card table { font-size: 0.7rem; }
+    .vision-card table th:first-child,
+    .vision-card table td:first-child {
+      white-space: normal;
+      min-width: 80px;
+    }
+
+    /* Flywheel badges */
+    .flywheel-row { flex-direction: column; gap: 6px; }
+    .flywheel-row span:first-child { min-width: auto; }
   }
 </style>
 </head>
@@ -580,7 +635,7 @@
         <p>Export MCP → le contexte est injecté dans Cursor/Claude. Le code est ancré dans la réalité terrain. Rapport PDF structuré généré automatiquement. Le client est bluffé.</p>
 
         <!-- Comparison table -->
-        <div style="margin-top: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+        <div class="erp-comparison">
           <div style="background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2); border-radius: 10px; padding: 16px;">
             <p style="font-weight: 700; color: #ef4444; margin-bottom: 8px;">❌ Sans Contexo</p>
             <p style="font-size: 0.85rem;">• Discovery: <strong>2-4 semaines</strong></p>
@@ -603,26 +658,26 @@
       <!-- NEW: ROI & METRICS -->
       <div class="vision-card">
         <h3>📊 Impact & Métriques</h3>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 12px;">
-          <div style="text-align: center; padding: 20px; background: rgba(59,130,246,0.06); border-radius: 10px;">
-            <div style="font-size: 2.2rem; font-weight: 800; color: #3b82f6;">75%</div>
-            <div style="font-size: 0.82rem; color: #94a3b8; margin-top: 4px;">Réduction du temps de discovery</div>
-            <div style="font-size: 0.72rem; color: #64748b;">3 semaines → 5 jours</div>
+        <div class="roi-grid">
+          <div class="roi-item" style="text-align: center; padding: 20px; background: rgba(59,130,246,0.06); border-radius: 10px;">
+            <div class="roi-value" style="font-size: 2.2rem; font-weight: 800; color: #3b82f6;">75%</div>
+            <div class="roi-label" style="font-size: 0.82rem; color: #94a3b8; margin-top: 4px;">Réduction du temps de discovery</div>
+            <div class="roi-sub" style="font-size: 0.72rem; color: #64748b;">3 semaines → 5 jours</div>
           </div>
-          <div style="text-align: center; padding: 20px; background: rgba(139,92,246,0.06); border-radius: 10px;">
-            <div style="font-size: 2.2rem; font-weight: 800; color: #8b5cf6;">~$3</div>
-            <div style="font-size: 0.82rem; color: #94a3b8; margin-top: 4px;">Coût par interview AI</div>
-            <div style="font-size: 0.72rem; color: #64748b;">vs $500+ consultant/heure</div>
+          <div class="roi-item" style="text-align: center; padding: 20px; background: rgba(139,92,246,0.06); border-radius: 10px;">
+            <div class="roi-value" style="font-size: 2.2rem; font-weight: 800; color: #8b5cf6;">~$3</div>
+            <div class="roi-label" style="font-size: 0.82rem; color: #94a3b8; margin-top: 4px;">Coût par interview AI</div>
+            <div class="roi-sub" style="font-size: 0.72rem; color: #64748b;">vs $500+ consultant/heure</div>
           </div>
-          <div style="text-align: center; padding: 20px; background: rgba(16,185,129,0.06); border-radius: 10px;">
-            <div style="font-size: 2.2rem; font-weight: 800; color: #10b981;">100%</div>
-            <div style="font-size: 0.82rem; color: #94a3b8; margin-top: 4px;">Savoir terrain capturé</div>
-            <div style="font-size: 0.72rem; color: #64748b;">Zéro info perdue entre les mains</div>
+          <div class="roi-item" style="text-align: center; padding: 20px; background: rgba(16,185,129,0.06); border-radius: 10px;">
+            <div class="roi-value" style="font-size: 2.2rem; font-weight: 800; color: #10b981;">100%</div>
+            <div class="roi-label" style="font-size: 0.82rem; color: #94a3b8; margin-top: 4px;">Savoir terrain capturé</div>
+            <div class="roi-sub" style="font-size: 0.72rem; color: #64748b;">Zéro info perdue entre les mains</div>
           </div>
-          <div style="text-align: center; padding: 20px; background: rgba(249,115,22,0.06); border-radius: 10px;">
-            <div style="font-size: 2.2rem; font-weight: 800; color: #f97316;">24/7</div>
-            <div style="font-size: 0.82rem; color: #94a3b8; margin-top: 4px;">Interviews en parallèle</div>
-            <div style="font-size: 0.72rem; color: #64748b;">Toutes langues, zéro formation</div>
+          <div class="roi-item" style="text-align: center; padding: 20px; background: rgba(249,115,22,0.06); border-radius: 10px;">
+            <div class="roi-value" style="font-size: 2.2rem; font-weight: 800; color: #f97316;">24/7</div>
+            <div class="roi-label" style="font-size: 0.82rem; color: #94a3b8; margin-top: 4px;">Interviews en parallèle</div>
+            <div class="roi-sub" style="font-size: 0.72rem; color: #64748b;">Toutes langues, zéro formation</div>
           </div>
         </div>
         <p style="margin-top: 16px; font-size: 0.88rem; color: #94a3b8;"><strong>Business Model:</strong> Track A (consulting) $2,500 setup + $500/mo → finance le Track B (SaaS). Marge: 90%+. Coût infra: $5-20/mo par client.</p>
@@ -632,15 +687,15 @@
         <h3>🔄 Le Flywheel (Le Moat)</h3>
         <p>Chaque projet améliore le suivant. L'intelligence s'accumule:</p>
         <div style="margin: 16px 0; display: grid; gap: 8px;">
-          <div style="display: flex; align-items: center; gap: 12px;">
+          <div class="flywheel-row" style="display: flex; align-items: center; gap: 12px;">
             <span style="background: rgba(239,68,68,0.15); color: #f87171; border-radius: 6px; padding: 4px 10px; font-weight: 700; font-size: 0.82rem; min-width: 90px; text-align: center;">Client #1</span>
             <span style="font-size: 0.9rem;">Questions correctes mais génériques — discovery en <strong>2 semaines</strong></span>
           </div>
-          <div style="display: flex; align-items: center; gap: 12px;">
+          <div class="flywheel-row" style="display: flex; align-items: center; gap: 12px;">
             <span style="background: rgba(249,115,22,0.15); color: #fb923c; border-radius: 6px; padding: 4px 10px; font-weight: 700; font-size: 0.82rem; min-width: 90px; text-align: center;">Client #10</span>
             <span style="font-size: 0.9rem;"><em>"Les manufacturiers de votre taille ont souvent un problème de traçabilité. C'est votre cas?"</em></span>
           </div>
-          <div style="display: flex; align-items: center; gap: 12px;">
+          <div class="flywheel-row" style="display: flex; align-items: center; gap: 12px;">
             <span style="background: rgba(59,130,246,0.15); color: #60a5fa; border-radius: 6px; padding: 4px 10px; font-weight: 700; font-size: 0.82rem; min-width: 90px; text-align: center;">Client #50</span>
             <span style="font-size: 0.9rem;"><em>"Vous exportez aux US? Vos assemblages nécessitent ASME BPVC Section IX en plus de CSA W47.1."</em> — <span class="highlight">Chirurgical.</span></span>
           </div>
