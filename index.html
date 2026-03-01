@@ -197,7 +197,8 @@
   }
   .mockup-item .info h4 { color: #e2e8f0; margin-bottom: 2px; }
   .mockup-item .info p { color: #64748b; font-size: 0.82rem; }
-  .mockup-item a {
+  .mockup-item a,
+  .mockup-item .btn-demo {
     margin-left: auto;
     background: rgba(139, 92, 246, 0.15);
     border: 1px solid rgba(139, 92, 246, 0.3);
@@ -209,7 +210,73 @@
     font-weight: 600;
     flex-shrink: 0;
   }
-  .mockup-item a:hover { background: rgba(139, 92, 246, 0.25); }
+  .mockup-item a:hover,
+  .mockup-item .btn-demo:hover { background: rgba(139, 92, 246, 0.25); }
+
+  /* Mockup screenshot cards (featured mockups with screenshots) */
+  .mockup-featured {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+  .mockup-card {
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 14px;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .mockup-card:hover { border-color: #8b5cf6; transform: translateY(-2px); }
+  .mockup-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+    cursor: pointer;
+    border-bottom: 1px solid #334155;
+  }
+  .mockup-card .card-body {
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .mockup-card .num {
+    background: rgba(139, 92, 246, 0.15);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    border-radius: 8px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: #a78bfa;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+  .mockup-card .card-info { flex: 1; }
+  .mockup-card .card-info h4 { color: #e2e8f0; font-size: 1rem; margin-bottom: 2px; }
+  .mockup-card .card-info p { color: #64748b; font-size: 0.82rem; }
+  .mockup-card .card-actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+  .mockup-card .card-actions a {
+    background: rgba(139, 92, 246, 0.15);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    border-radius: 8px;
+    padding: 6px 14px;
+    color: #a78bfa;
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 600;
+    transition: background 0.2s;
+  }
+  .mockup-card .card-actions a:hover { background: rgba(139, 92, 246, 0.25); }
 
   /* Vision section */
   .vision-card {
@@ -298,6 +365,9 @@
     nav button { font-size: 0.75rem; padding: 6px 10px; }
     .pipeline { flex-direction: column; }
     .pipeline-arrow { transform: rotate(90deg); }
+    .mockup-featured { grid-template-columns: 1fr; }
+    .mockup-card .card-body { flex-direction: column; text-align: center; }
+    .mockup-card .card-actions { margin-left: 0; }
     .mockup-item { flex-direction: column; text-align: center; }
     .mockup-item a { margin-left: 0; }
   }
@@ -403,22 +473,36 @@
       <h2>🎨 Mockups UI (v0)</h2>
       <p class="desc">10 écrans générés via v0 Platform API — Dark mode, français, SaaS premium</p>
 
+      <!-- Featured mockups with screenshots -->
+      <div class="mockup-featured">
+        <div class="mockup-card">
+          <img src="mockup-login-screenshot.png" alt="Login Page" onclick="openLightbox(this.src)">
+          <div class="card-body">
+            <div class="num">1</div>
+            <div class="card-info"><h4>🔐 Login Page</h4><p>Dark mode, authentification FR</p></div>
+            <div class="card-actions"><a href="https://demo-kzmlu1t09qlf2ihxxwms.vusercontent.net" target="_blank">Demo ↗</a></div>
+          </div>
+        </div>
+        <div class="mockup-card">
+          <img src="mockup-landing-screenshot.png" alt="Landing Page" onclick="openLightbox(this.src)">
+          <div class="card-body">
+            <div class="num">2</div>
+            <div class="card-info"><h4>🏠 Landing Page</h4><p>Hero + features + how it works + footer</p></div>
+            <div class="card-actions"><a href="https://demo-kzmok9nuqxqubw8ngyep.vusercontent.net" target="_blank">Demo ↗</a></div>
+          </div>
+        </div>
+        <div class="mockup-card">
+          <img src="mockup-project-creation-screenshot.png" alt="Création de Projet" onclick="openLightbox(this.src)">
+          <div class="card-body">
+            <div class="num">3</div>
+            <div class="card-info"><h4>➕ Création de Projet</h4><p>Wizard 3 étapes: décrire, upload, review & launch</p></div>
+            <div class="card-actions"><a href="https://demo-kzmin3qy8xh66spwmdf5.vusercontent.net" target="_blank">Demo ↗</a></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Remaining mockups (no live demo yet) -->
       <div class="mockup-list">
-        <div class="mockup-item">
-          <div class="num">1</div>
-          <div class="info"><h4>🔐 Login Page</h4><p>Dark mode, authentification FR</p></div>
-          <a href="https://demo-kzmlu1t09qlf2ihxxwms.vusercontent.net" target="_blank">Demo ↗</a>
-        </div>
-        <div class="mockup-item">
-          <div class="num">2</div>
-          <div class="info"><h4>🏠 Landing Page</h4><p>Hero + features + how it works + footer</p></div>
-          <a href="https://demo-kzmok9nuqxqubw8ngyep.vusercontent.net" target="_blank">Demo ↗</a>
-        </div>
-        <div class="mockup-item">
-          <div class="num">3</div>
-          <div class="info"><h4>➕ Création de Projet</h4><p>Wizard 3 étapes: décrire, upload, review & launch</p></div>
-          <a href="https://demo-kzmin3qy8xh66spwmdf5.vusercontent.net" target="_blank">Demo ↗</a>
-        </div>
         <div class="mockup-item">
           <div class="num">4</div>
           <div class="info"><h4>📚 Vue KB</h4><p>Fact cards avec barres de confiance, gaps, contradictions, AI summary</p></div>
@@ -492,7 +576,7 @@
 
   <footer>
     <p>Contexo Platform — Confidentiel © 2026</p>
-    <p style="margin-top: 4px; font-size: 0.75rem;">Dernière mise à jour: Février 2026</p>
+    <p style="margin-top: 4px; font-size: 0.75rem;">Dernière mise à jour: 28 février 2026</p>
   </footer>
 </div>
 
